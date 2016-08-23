@@ -17,6 +17,7 @@ public class Principal extends javax.swing.JFrame {
     /**
      * Creates new form Principal
      */
+    double v[];
     public Principal() {
         initComponents();
     }
@@ -38,7 +39,7 @@ public class Principal extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         cmdCrear = new javax.swing.JButton();
         cmdLlenarManual = new javax.swing.JButton();
-        txtLlenarAutomatico = new javax.swing.JButton();
+        cmdLlenarAutomatico = new javax.swing.JButton();
         cmdMostrar = new javax.swing.JButton();
         cmdBorrar = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
@@ -84,18 +85,38 @@ public class Principal extends javax.swing.JFrame {
 
         cmdLlenarManual.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
         cmdLlenarManual.setText("Llenar Manual");
+        cmdLlenarManual.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdLlenarManualActionPerformed(evt);
+            }
+        });
         jPanel2.add(cmdLlenarManual, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 130, -1));
 
-        txtLlenarAutomatico.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
-        txtLlenarAutomatico.setText("Llenar Automatico");
-        jPanel2.add(txtLlenarAutomatico, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 130, -1));
+        cmdLlenarAutomatico.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
+        cmdLlenarAutomatico.setText("Llenar Automatico");
+        cmdLlenarAutomatico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdLlenarAutomaticoActionPerformed(evt);
+            }
+        });
+        jPanel2.add(cmdLlenarAutomatico, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 130, -1));
 
         cmdMostrar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         cmdMostrar.setText("Mostrar");
+        cmdMostrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdMostrarActionPerformed(evt);
+            }
+        });
         jPanel2.add(cmdMostrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 130, -1));
 
         cmdBorrar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         cmdBorrar.setText("Borrar");
+        cmdBorrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdBorrarActionPerformed(evt);
+            }
+        });
         jPanel2.add(cmdBorrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, 130, -1));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 40, 150, 250));
@@ -127,6 +148,7 @@ public class Principal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cmdCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdCrearActionPerformed
+        int longitud;
         
         if(txtLongitud.getText().trim().isEmpty()){
             JOptionPane.showMessageDialog(this,"Digite la Longitud.","ERROR",JOptionPane.ERROR_MESSAGE);
@@ -135,6 +157,13 @@ public class Principal extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "La longitud no puede ser cero.", "ERROR", JOptionPane.ERROR_MESSAGE);
             txtLongitud.requestFocusInWindow();
             txtLongitud.selectAll();
+        }else{
+            
+         longitud=Integer.parseInt(txtLongitud.getText().trim());
+         v = new double [longitud];
+         JOptionPane.showMessageDialog(this, "Vector Creado Exitosamente");
+         
+         
         }
         
         
@@ -148,6 +177,39 @@ public class Principal extends javax.swing.JFrame {
               evt.consume(); 
           } 
     }//GEN-LAST:event_txtLongitudKeyTyped
+
+    private void cmdLlenarManualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdLlenarManualActionPerformed
+        double n;
+        for (int i = 0; i < v.length; i++) {
+            n=Double.parseDouble(JOptionPane.showInputDialog(this,"Digite el elemento en la pocisión "+i));
+            v[i]=n;
+        }
+    }//GEN-LAST:event_cmdLlenarManualActionPerformed
+
+    private void cmdMostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdMostrarActionPerformed
+        for (int i = 0; i < v.length; i++) {
+            txtResultado.append(v[i]+"\n");
+                                                                                             
+        }
+    }//GEN-LAST:event_cmdMostrarActionPerformed
+
+    private void cmdBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdBorrarActionPerformed
+        txtLongitud.setText("");
+        txtResultado.setText("");
+        v=null;
+        txtLongitud.requestFocusInWindow();
+        
+    }//GEN-LAST:event_cmdBorrarActionPerformed
+
+    private void cmdLlenarAutomaticoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdLlenarAutomaticoActionPerformed
+        double n;
+        for (int i = 0; i < v.length; i++) {
+            n=(int)(Math.random()*50 + 1); //Aleatorio
+            //n=i+1; //Ordenado
+            v[i]=n;
+        }
+        JOptionPane.showMessageDialog(this, "Vcetor Llenado Correctamente");
+    }//GEN-LAST:event_cmdLlenarAutomaticoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -187,6 +249,7 @@ public class Principal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cmdBorrar;
     private javax.swing.JButton cmdCrear;
+    private javax.swing.JButton cmdLlenarAutomatico;
     private javax.swing.JButton cmdLlenarManual;
     private javax.swing.JButton cmdMostrar;
     private javax.swing.JLabel jLabel1;
@@ -196,7 +259,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JButton txtLlenarAutomatico;
     private javax.swing.JTextField txtLongitud;
     private javax.swing.JTextArea txtResultado;
     // End of variables declaration//GEN-END:variables
