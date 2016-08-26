@@ -194,9 +194,21 @@ public class Principal extends javax.swing.JFrame {
 
     private void cmdLlenarManualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdLlenarManualActionPerformed
         double n;
+        int sw;
         for (int i = 0; i < v.length; i++) {
+            do{
+                sw=1;
+            try{
             n=Double.parseDouble(JOptionPane.showInputDialog(this,"Digite el elemento en la pocisión "+i));
             v[i]=n;
+            }catch(NumberFormatException e){
+                JOptionPane.showMessageDialog(this, "Digite un número valido.");
+                sw=0;
+            }catch(NullPointerException e){
+                JOptionPane.showMessageDialog(this, "No puedes salir");
+                sw=0;
+            }
+            }while(sw==0);
         }
         cmdCrear.setEnabled(false);
         cmdLlenarManual.setEnabled(false);
